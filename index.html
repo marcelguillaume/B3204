@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" lang="fr">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>B-3204 : Le film interactif</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/favicon2.png" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.vide.js"></script>
+    <script type="text/javascript" src="js/scroll-to.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="js/loader.js"></script>
+</head>
+
+<body>
+    <div id="page-loading">
+        <img class="loader" src="img/8CLT.gif" alt="loading">
+    </div>
+    <header>
+        <a href="#accueil" class="js-scrollTo">Accueil</a>
+        <a href="#synopsis" class="js-scrollTo">Synopsis</a>
+        <a href="#accueil" class="js-scrollTo" id="logoButton"><img src="img/logo.png" alt="logo" /></a>
+        <a href="#equipe" class="js-scrollTo">L'équipe</a>
+        <a href="#contact" class="js-scrollTo">Contact</a>
+    </header>
+    <section id="accueil">
+        <div style="width: 100vw; height: 100vh;" data-vide-bg="video/back" data-vide-options="loop: true, muted: true, position: 0% 0%" class="video-background"></div>
+        <h1>Une e<span class="lettercolor">x</span>périence<br />cinémat<span class="lettercolor">o</span>graphique uni<span class="lettercolor">q</span>ue</h1>
+        <a href="interfacevideo/"><span class="jauge"></span>Lancer le film</a>
+    </section>
+    <section id="synopsis">
+        <h2>SYNOPSIS</h2>
+        <p>B-3204 est un film interactif au concept original. Pour arriver au bout de l’intrigue, vous devrez faire des choix. Mais contrairement à la plupart des autres films interactifs, vos choix se feront à l’aide de votre voix et de QR codes.
+
+            L’intrigue se passe au Cégep de Matane, la nuit, au cours d’une forte tempête de neige. La plupart des résidents sont partis retrouver leur famille pour les vacances de Noël. Seuls sept étudiants sont encore présents dans l’établissement. L’un d’eux tombe sur le corps de Louis, l’un de leurs camarades. Vous incarnez Thomas, le meilleur ami de Louis, et vous décidez d’enquêter afin de retrouver le meurtrier et de rendre justice à votre ami.
+        </p>
+    </section>
+    <section id="equipe">
+        <h2>L'équipe</h2>
+        <div id="team">
+            <div class="membre">
+                <img src="img/guillaume.jpg" alt="Guillaume" />
+                <p class="nom">Guillaume Marcel</p>
+                <p class="role">Programmeur</p>
+            </div>
+            <div class="membre">
+                <img src="img/maelle.jpg" alt="Maelle" />
+                <p class="nom">Maëlle Egrix</p>
+                <p class="role">Scénariste</p>
+            </div>
+            <div class="membre">
+                <img src="img/alexis.jpg" alt="alexis" />
+                <p class="nom">Alexis Enguerrand</p>
+                <p class="role">Cadreur</p>
+            </div>
+            <div class="membre">
+                <img src="img/antoine.jpg" alt="antoine" />
+                <p class="nom">Antoine Trément</p>
+                <p class="role">Chef opérateur</p>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <form action="envoi.php" method="post">
+            <div class="orga_form">
+                <input type="text" name="prenom" placeholder="Prénom">
+                <input type="text" name="nom" placeholder="Nom">
+            </div>
+            <input type="email" name="email" placeholder="Email">
+            <textarea name="message" placeholder="Message"></textarea>
+        </form>
+        <input type="submit" value="ENVOYER">
+        <a href="https://www.facebook.com/b3204/"><img src="img/facebook.svg" alt="facebook" /></a>
+    </section>
+</body>
+
+</html>

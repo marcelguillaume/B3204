@@ -1,0 +1,55 @@
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Film</title>
+  <link rel="stylesheet" href="style.css" media="screen">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+  
+</head>
+<body>
+    
+    <div id="enquete">
+        <h1>C'est à vous d'enquêtez et de cherchez des indices ! </h1> 
+        <section>
+            <div id="notes">
+              <h1>Consultez les notes</h1>
+               <section>
+                <img id="qrious">
+               </section>  
+            </div>
+
+            <div id="telephone">
+               <h1>Regarder le téléphone de Louis</h1>
+                <section>
+                <img id="qrious2">
+               </section> 
+
+            </div>
+        </section>
+    </div>
+    
+    
+
+</body>
+ 
+
+
+<script src="qrious.js"></script>
+<script>
+  (function() {
+
+    var qr = window.qr = new QRious({
+      element: document.getElementById('qrious'),
+      size: 350,
+      value: 'https://tim.cgmatane.qc.ca/projets/2019/eq6/ficheperso/'
+    });
+      
+    var qr2 = window.qr2 = new QRious({
+      element: document.getElementById('qrious2'),
+      size: 350,
+      value: 'https://tim.cgmatane.qc.ca/projets/2019/eq6/louis/'
+    });
+
+  })();
+</script>

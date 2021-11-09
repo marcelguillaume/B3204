@@ -1,0 +1,298 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+@font-face {
+    font-family: 'evolve';
+    src: url(../fonts/evolve/evolveregular.otf);
+}
+@font-face {
+    font-family: 'evolveThin';
+    src: url(../fonts/evolve/evolvethin.otf);
+}
+@font-face {
+    font-family: 'coco';
+    src: url(../fonts/coco/coco.ttf);
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #2E2E2E;
+    z-index: 9999;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #C01213;
+}
+.lettercolor {
+    color: #C01213;
+}
+
+/**LOADER**/
+
+#page-loading {
+    background-color: black;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;  
+}
+#page-loading .loader {
+    display: flex;
+    height: auto;
+    width: 400px;
+    animation: load 0.75s linear infinite;
+    -webkit-animation: load 2s linear infinite;
+}
+#page-loading .loader:after {
+    content: '';
+    top: 1px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: white;
+    border-radius: 50%;
+}
+
+/*------------------HEADER-------------------*/
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    transition: .3s;
+    z-index: 9;
+}
+header img {
+    width: 100%;
+    margin: 1vw 0;
+    transform: rotate(-4deg);
+    transition: .3s;
+}
+header a {
+    font-family: 'evolve';
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.2vw;
+    padding: 0.5vw 0;
+    transition: 0.3s;
+}
+header a:hover {
+    color: #C01213;
+}
+#logoButton {
+    margin: 0;
+    padding: 0;
+    width: 15%;
+}
+
+/*-----------------------ACCUEIL----------------------*/
+
+.video-background {
+    z-index: -10;
+    position: absolute;
+    top: 0;
+}
+#accueil {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+}
+#accueil h1 {
+    font-family: 'coco';
+    color: white;
+    font-size: 3vw;
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+}
+#accueil a {
+    font-family: evolve;
+    color: white;
+    font-size: 1.5vw;
+    padding: 1vw;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.6);
+    transition: .3s;
+    display: block;
+    position: relative;
+}
+.jauge {
+    width: 0;
+    transition: 1s ease;
+    height: 100%;
+    background-color: rgba(255,255,255,0.6);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+#accueil a:hover .jauge {
+    width: 100%;
+}
+
+/*-----------------------SYNOPSIS----------------------*/
+
+#synopsis {
+    background: #F9F9F9;
+    padding: 3vw 0;
+    
+}
+#synopsis h2 {
+    font-family: 'coco';
+    font-weight: 100;
+    font-size: 2.4vw;
+    margin: 0 0 3vw 0;
+    text-indent: 6vw;
+}
+#synopsis p {
+    width: 75%;
+    margin: auto;
+    font-size: 1.2vw;
+    font-family: evolve;
+    text-align: justify;
+}
+
+/*-----------------------EQUIPE----------------------*/
+
+#equipe {
+    display: block;
+    background: #040d16;
+    padding: 3vw 0;
+}
+#equipe h2 {
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    font-family: 'coco';
+    font-size: 2.4vw;
+    font-weight: 100;
+    margin: 0 0 3vw 0;
+}
+#team {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%
+}
+.membre {
+    width: 15%;
+}
+.membre img {
+    width: 100%;
+    filter: grayscale(100%);
+    transition: .3s;
+}
+.membre:hover img {
+    filter: none;
+}
+.nom {
+    color: white;
+    text-align: center;
+    margin: 0.4vw 0;
+    font-family: evolve;
+    font-size: 1.8vw;
+}
+.role {
+    color: white;
+    text-align: center;
+    font-family: evolveThin;
+    margin: 0;
+    font-size: 1.8vw;
+    font-weight: 100;
+    font-style: italic;
+}
+
+/*-----------------------SYNOPSIS----------------------*/
+
+#contact {
+    background: #F9F9F9;
+    padding: 3vw 0;
+    width: 100vw;
+}
+#contact h2 {
+    font-family: 'coco';
+    font-weight: 100;
+    font-size: 2.4vw;
+    margin: 0 0 3vw 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+#contact form {
+    width: 40%;
+    margin: auto;
+    background: #E0E0E0;
+    padding-bottom: 0.1vw;
+    box-shadow: 0 0 3vw rgba(0,0,0,0.3);
+}
+.orga_form {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+#contact form input {
+    border: none;
+    margin: 3vw 0;
+    padding: 1vw 0;
+    text-indent: 1vw;
+    font-family: evolve;
+    font-size: 1.1vw;
+}
+#contact form input[type="text"] {
+    width: 48%;
+}
+#contact form input[type="email"] {
+    width: 90%;
+    margin: auto;
+    display: block;
+}
+#contact form textarea {
+    width: 90%;
+    display: block;
+    border: none;
+    padding: 1vw 0 4vw 0;
+    margin: 3vw auto;
+    text-indent: 1vw;
+    font-family: evolve;
+    font-size: 1.1vw;
+    resize: none;
+}
+#contact input[type="submit"] {
+    width: 15%;
+    padding: 1vw 0;
+    margin: 3vw auto 0 auto;
+    background: #C01213;
+    font-family: evolveThin;
+    color: white;
+    border: none;
+    display: block;
+    font-size: 1.3vw;
+    cursor: pointer;
+    transition: .2s;
+}
+#contact input[type="submit"]:hover {
+    box-shadow: 0 0 3vw rgba(0,0,0,0.4);
+}
+#contact img {
+    display: block;
+    filter:grayscale(100%);
+    width: 3vw;
+    margin: 1vw auto;
+    transition: .3s;
+}
+#contact img:hover {
+    filter: none;
+}

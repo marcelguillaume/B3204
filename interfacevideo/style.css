@@ -1,0 +1,243 @@
+body {
+    margin: 0px;
+    background-color: black;
+    font-family: sans-serif;
+}
+
+
+#contenu {
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    right: 0;
+    bottom: 0px;
+
+    z-index: -10;
+
+}
+
+
+video {
+    width: 100vw;
+
+
+    transition-duration: 1s;
+}
+
+#progress {
+    width: 100%;
+    transition-duration: 5s;
+    transition-timing-function: linear;
+    height: 8px;
+    margin: auto;
+    background-color: #8e9eab;
+    border-radius: 3.5px;
+}
+
+#content-progress {
+    width: 10%;
+    height: 8px;
+    background-color: whitesmoke;
+    z-index: 100;
+}
+
+#bulle {
+    z-index: 9999;
+    margin: auto;
+    width: 100px;
+}
+
+#bulle_img {
+    width: 75px;
+}
+
+@font-face {
+    font-family: 'Just tell me what';
+    src: url(jtr.otf);
+}
+
+@import url(jtr.otf);
+
+
+h1 {
+    color: white;
+    font-family: 'COCOGOOSELETTERPRESS TRIAL.ttf', sans-serif;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 40px;
+
+}
+
+
+#tuto {
+    background-color: rgb(255, 255, 255, 0.4);
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+    position: fixed;
+    text-align: center;
+
+
+}
+
+#tuto h2 {
+    color: white;
+    font-family: 'Just tell me what';
+    display: inline-block;
+    margin: 100px;
+    text-transform: none;
+    line-height: 100px;
+    font-size: 50px;
+    top: 25%;
+    position: relative;
+    z-index: 3;
+    opacity: 1;
+    transition-duration: 0.5s;
+}
+
+#tuto h2:hover {
+    text-shadow: 5px 5px 5px black;
+    transition-duration: 0.5s;
+}
+
+#choix {
+    position: absolute;
+    bottom: 30px;
+    left: 24%;
+
+
+    width: 1100px;
+
+
+    text-align: center;
+    align-content: center;
+    margin: auto;
+}
+
+#choix h1 {
+
+
+    text-transform: none;
+    font-size: 1.2em;
+    color: white;
+
+    background: rgb(34, 33, 54);
+    background: -webkit-linear-gradient(top left, rgba(34, 33, 54, 0.9430147058823529) 0%, rgba(67, 67, 68, 0.9850315126050421) 33%, rgba(52, 52, 52, 0.9626225490196079) 58%, rgba(33, 33, 33, 0.9290091036414566) 100%);
+    background: -o-linear-gradient(top left, rgba(34, 33, 54, 0.9430147058823529) 0%, rgba(67, 67, 68, 0.9850315126050421) 33%, rgba(52, 52, 52, 0.9626225490196079) 58%, rgba(33, 33, 33, 0.9290091036414566) 100%);
+    background: linear-gradient(to bottom right, rgba(34, 33, 54, 0.9430147058823529) 0%, rgba(67, 67, 68, 0.9850315126050421) 33%, rgba(52, 52, 52, 0.9626225490196079) 58%, rgba(33, 33, 33, 0.9290091036414566) 100%)Â;
+
+    padding: 11px;
+    border-radius: 3.5px;
+    margin: 10px;
+    margin-bottom: 15px;
+}
+
+#choix .select {
+
+
+    text-transform: none;
+    font-size: 1.2em;
+    color: white;
+
+    background: white;
+    color: black;
+
+    padding: 15px;
+    border-radius: 3.5px;
+    margin: 10px;
+    margin-bottom: 15px;
+
+    transition-duration: 1s;
+}
+
+#choix #full {
+    width: 100%;
+    height: 8px;
+    background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF 51%, #ECE9E6 100%);
+    display: inline-block;
+    border-radius: 3.5px;
+}
+
+
+
+#choix #progress {
+    width: 100%;
+    transition-duration: 5s;
+    transition-timing-function: linear;
+    height: 8px;
+    margin: auto;
+    background-color: #8e9eab;
+    border-radius: 3.5px;
+
+}
+
+.enquete {
+    position: fixed;
+    z-index: 99999999;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: black;
+    text-align: center;
+}
+
+.enquete h1 {
+
+    color: white;
+    font-family: 'Just tell me what';
+    text-transform: none;
+    line-height: 100px;
+    font-size: 50px;
+
+    background-color: black;
+
+
+}
+
+#notes {
+
+    width: 49%;
+    height: 500px;
+    display: inline-block;
+}
+
+#telephone {
+    width: 49%;
+    height: 500px;
+    display: inline-block;
+}
+
+.enquete section {
+    margin: auto;
+    width: 90%
+}
+
+.enquete div h1 {
+    font-size: 40px;
+    margin: 0px;
+    font-family: 'Lato';
+    font-weight: 400;
+}
+
+.code {
+    color: white;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 999999999999999999999;
+}
+
+
+
+
+
+
+#filtre {
+    width: 100%;
+    height: 100%;
+}

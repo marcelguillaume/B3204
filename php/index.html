@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Film</title>
+    <link rel="stylesheet" href="style.css" media="screen">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+    <script src="qrious.js"></script>
+    <link href="jtr.otf" rel="stylesheet">
+</head>
+
+<body>
+    <span class="code code_debut"></span>
+
+    <div id="tuto">
+        <h2 id="continuer">Continuer le tutoriel</h2>
+        <h2 id="passer">Passer le tutoriel</h2>
+    </div>
+
+    <div class="enquete">
+        <h1>C'est à vous d'enquêtez et de cherchez des indices ! </h1>
+        <section>
+            <div id="notes">
+                <h1>Consultez les notes</h1>
+                <section>
+                    <img id="qrious">
+                </section>
+            </div>
+
+            <div id="telephone">
+                <h1>Regarder le téléphone de Louis</h1>
+                <section>
+                    <img id="qrious2">
+                </section>
+                <div id="vue"></div>
+                <div id="parole"></div>
+            </div>
+            <h1 class="continuer">Découvrez 3 indices sur le téléphone et passez à l'étape suivante ! </h1>
+        </section>
+    </div>
+
+
+
+    <div id="bulle"><img src="Bulle.png" id="bulle_img"></div>
+
+    <div id="contenu">
+
+        <video id="video" autoplay>
+            <source src="0F.mp4" id="video" type="video/mp4">
+        </video>
+
+
+
+    </div>
+
+    <div id="choix">
+        <h1 class="choix1"></h1>
+        <h1 class="choix2"></h1>
+        <h1 class="choix3"></h1>
+        <h1 class="choix4"></h1>
+        <div id="progress">
+            <div id="content-progress"></div>
+        </div>
+    </div>
+</body>
+<script>
+    var httpRequest = new XMLHttpRequest();
+
+    var x1 = Math.ceil((Math.random() * 9));
+    var x2 = Math.ceil((Math.random() * 9));
+    var x3 = Math.ceil((Math.random() * 9));
+    var x4 = Math.ceil((Math.random() * 9));
+    var x5 = Math.ceil((Math.random() * 9));
+    var lettre = ["Z", "A", "B", "C", "D", "E", "F", "G", "H", "Y", "J", "K"];
+
+    var code = lettre[x1] + x2 + x3 + x4 + x5;
+
+    var choix = "0";
+
+    var r = 0;
+
+    $(".code").text(code);
+
+    var question = new Audio();
+    question.src = "question.wav";
+
+    var ambiance = new Audio();
+    ambiance.src = "ambiance.mp3";
+
+    var buzz = new Audio();
+    buzz.src = "745.mp3";
+
+
+    var picto = document.getElementById("bulle_img");
+    var vid = document.getElementById("video");
+    var seq = "0";
+    var int = 0;
+
+    var int_m = 0;
+    var int_es = 0;
+    var int_s = 0;
+    var int_c = 0;
+
+    var acc_c = 0;
+    var acc_m = 0;
+    var acc_es = 0;
+
+    var look = 0;
+
+
+
+    // Fonction pour faire pause sur la video
+
+    document.addEventListener('keydown', (e) => {
+
+        if (event.code == "Space") {
+            if (vid.paused == false) {
+                vid.pause();
+            } else {
+
+                vid.play();
+            }
+        }
+
+        if (vid.paused == false) {
+            if (event.code == "ArrowRight") {
+                vid.currentTime++;
+            }
+
+            if (event.code == "ArrowLeft") {
+                vid.currentTime--;
+            }
+        }
+
+        if (event.code == "ArrowUp") {
+            lancervoix();
+        }
+
+
+    })
+
+
+
+
+    var filtre = 0;
+
+
+    $("#tuto").hide();
+
+
+    $(".code").addClass('code_debut');
+
+
+
+    $(window).mousemove(function() {
+
+        if (window.filtre == 0 && window.seq == 0) {
+
+
+            vid.pause();
+            $("#tuto").fadeIn();
+
+            $("#continuer").click(function() {
+                $("#tuto").fadeOut();
+                vid.play()
+                ambiance.pause();
+            })
+
+        }
+
+
+        window.filtre++
+
+    })
+
+
+    $("#bulle").on('click', lancervoix);
+
+    $("h1").hide();
+    $("#progress").hide();
+
+    $(".continuer").on('click', function() {
+        $(".enquete").fadeOut();
+        window.seq = "B01"
+        vid.src = "B01.mp4";
+        ambiance.pause();
+    });
+
+
+
+    vid.addEventListener('ended', function() {
+
+                $("#progress").show();
+                $("#content-progress").css("width", "100%");
+
+                if (seq == "0") {
+                    $("h1").show();
+                    $("h1").removeClass("select");
+                    $(".choix1").text('Oui');
+                    $(".choix2").text('Non');
+                    $(".choix3").hide();
+                    $(".choix4").hide();
+                    lancervoix();
+                }
+
+                if (seq == "B01S") {
+                    requete("quit");
+                    $(".code").fadeOut();
+                    $("choix").fadeOut();
+                    $("img").fadeOut();
+                    window.seq = "GEN";
+                    vid.src = "GEN.mp4";
+                }
+
+
+                if (seq == "A01") {
+                    $("h1").show();
+                    $("h1").removeClass("select");
+                    $(".choix1").text('Appeler la police');
+                    $(".choix2").text('Ne pas Appeler la police');
+                    $(".choix3").hide();
+                    $(".choix4").hide()
+                    lancervoix();
+                }
+
+                if (seq == "A021") {
+                    $("h1").show();
+                    $("h1").removeClass("select");
+                    $(".choix1").text('Enquêter');
+                    $(".choix2").text('Ne pas enquêter');
+                    $(".choix3").hide();
+                    $(".choix4").hide();
+                    lancervoix();
+                }
+
+                if (seq == "A022") {
+                    $("h1").show();
+                    $("h1").removeClass("select");
+                    $(".choix1").text('Enquêter');
+                    $(".choix2").text('Ne pas enquêter');
+                    $(".choix3").hide();
+                    $(".choix4").hide();
+                    lancervoix();
+                }
+
+                if (seq == "A031" || seq == "A032" || seq == "A04M1" || seq == "A04M2" || seq == "A04C1" || seq == "A04C2" || seq == "A04S1" || seq == "A04S2" || seq == "A04ES1" || seq == "A04ES2") {
+
+                    $("h1").show();
+                    $("h1").removeClass("select");
+                    lancervoix();
+
+
+
+                    if (window.int_m == 0) {
+                        $(".choix1").text('Intéroger Marcel');
+                    }
+
+
+                    if (window.int_s == 0) {
+                        $(".choix2").text('Intéroger Sarah');
+                    }
+
+
+
+                    if (window.int_c == 0) {
+                        $(".choix3").text('Intéroger Charlotte');
+                    }
+
+                    if (window.int_es == 0) {
+                        $(".choix4").text('Intéroger Eglantine et Simon');
+                    }
+
+                    if (window.int_m == 1) {
+                        $(".choix1").hide()
+                    }
+                    if (window.int_s == 1) {
+                        $(".choix2").hide()
+                    }
+                    if (window.int_c == 1) {
+                        $(".choix3").hide()
+                    }
+                    if (window.int_es == 1) {
+                        $(".choix4").hide()
+                    }
+
+                    if (window.int == 2) {
+                        $("h1").hide();
+                        vid.src = "A05.mp4";
+                        window.seq = "A05";
+                        int = 3;
+                    }
+
+
+                    lancervoix();
+                }
+
+                if (seq == "A032") {
+                    $(document).load('requete.php?req=A032&code=' + code)
+                }
+
+
+
+                if (seq == "A04M") {
+                    $(".choix3").text('');
+                    $(".choix4").text('');
+                    $("h1").show();
+                    $("h1").removeClass("select");
+                    $(".choix1").text('Comment as-tu découvert le corps de Louis ?');
+                    $(".choix2").text('Pourquoi tu as fais ça ?');
+                    $(".choix3").hide();
+                    $(".choix4").hide();
+                    lancervoix();
+                    $(document).load('requete.php?req=A04M&code=' + code)
+                }
+
+                if (seq == "A04C") {
+                    $("h1").show();
+                    $("h1").removeClass("select");
+                    $(".choix1").text('Comment tu te sens, Charlotte?');
+                    $(".choix2").text('Quand as-tu vu Louis pour la dernière fois?');
+                    $(".choix3").hide();
+                    $(".choix4").hide();
+                    lancervoix();
+                }
+
+                if (seq == "A04C1") {
+                    $(document).load('requete.php?req=A0C1&code=' + code)
+
+                    if (seq == "A04C2") {
+                        $(document).load('requete.php?req=A04C2&code=' + code)
+                    }
+
+                    if (seq == "A04S1") {
+                        $(document).load('requete.php?req=A0S1&code=' + code)
+                    }
+
+                    if (seq == "A04S2") {
+                        $(document).load('requete.php?req=A04S2&code=' + code)
+                    }
+
+                    if (seq == "A04ES1") {
+                        $(document).load('requete.php?req=A04ES1E&code=' + code)
+                        $(document).load('requete.php?req=A04ES1S&code=' + code)
+                    }
+
+                    if (seq == "A04ES2") {
+                        $(document).load('requete.php?req=A04ES2E&code=' + code)
+                        $(document).load('requete.php?req=A04ES2S&code=' + code)
+                    }
+
+
+
+
+
+                    if (seq == "A04S") {
+                        $("h1").show();
+                        $("h1").removeClass("select");
+                        $(".choix1").text('Pourquoi tu pleures ?');
+                        $(".choix2").text('Est-ce que tu a vu ou entendu quelque chose ?');
+                        $(".choix3").hide();
+                        $(".choix4").hide();
+                        lancervoix();
+                    }
+
+                    if (seq == "A04ES") {
+                        $("h1").show();
+                        $("h1").removeClass("select");
+                        $(".choix1").text('Est-ce que vous avez remarquer quelque chose?');
+                        $(".choix2").text('Où etiez vous ?');
+                        $(".choix3").hide();
+                        $(".choix4").hide();
+                        lancervoix();
+                    }
+
+
+
+                    if (seq == "A05") {
+                        $("h1").show();
+                        $("h1").removeClass("select");
+                        $(".choix3").hide();
+                        $(".choix4").hide();
+                        $(".choix1").text('Ta gueule Charlotte !');
+                        $(".choix2").text('J\'ai jamais fait ça');
+                        lancervoix();
+
+                        ;
+                    }
+
+                    if (seq == "A052") {
+                        $(".enquete").fadeIn();
+                        $(".enquete h1").show();
+                        ambiance.play();
+                    }
+
+                    if (seq == "A051") {
+                        $(".enquete").fadeIn();
+                        $(".enquete h1").show();
+                        ambiance.play();
+                    }
+
+
+                    if (seq == "B01" || seq == "B01ES" || seq == "B01C" || seq == "B01M") {
+                        $("h1").show();
+
+
+                        $("h1").removeClass("select");
+
+
+                        if (window.acc_es == 0) {
+                            $(".choix1").text('Accuser Eglantine ou Simon');
+                            lancervoix();
+                        }
+
+                        if (window.acc_c == 0) {
+                            $(".choix2").text('Accuser Charlotte ');
+                            lancervoix();
+                        }
+
+                        $(".choix3").text('Accuser Sarah');
+
+                        if (window.acc_m == 0) {
+                            $(".choix4").text('Accuser Marcel');
+                            lancervoix();
+                        }
+
+                        if (window.acc_m == 1) {
+                            $(".choix4").hide()
+                        }
+                        if (window.acc_c == 1) {
+                            $(".choix2").hide()
+                        }
+                        if (window.acc_es == 1) {
+                            $(".choix1").hide()
+                        }
+
+
+
+                    }
+
+
+
+                })
+
+
+            $("#passer").click(function() {
+
+                $("#tuto").hide();
+                window.filtre++;
+
+                window.seq = "A01";
+                console.log(seq);
+                vid.src = "A01.mp4";
+                $("h1").fadeOut("slow", function() {});
+
+            })
+
+
+
+
+
+
+
+
+
+            var final_transcript = '';
+            var recognizing = false;
+            var ignore_onend;
+            var start_timestamp;
+            if (!('webkitSpeechRecognition' in window)) {
+                upgrade();
+            } else {
+
+
+
+                var recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+
+
+                recognition.onresult = function(event) {
+                    var interim_transcript = '';
+                    if (typeof(event.results) == 'undefined') {
+                        recognition.onend = null;
+                        recognition.stop();
+                        return;
+
+                    }
+                    for (var i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            final_transcript += event.results[i][0].transcript;
+
+                            final_transcript = capitalize(final_transcript);
+                            var retour = linebreak(final_transcript);
+
+                            console.log(retour);
+
+
+                            parole(retour);
+
+
+
+
+
+
+
+
+                        } else {
+                            interim_transcript += event.results[i][0].transcript;
+                            interim_span.innerHTML = linebreak(interim_transcript);
+                            document.getElementById('tags').value = interim_span.innerHTML;
+                        }
+                    }
+                    final_transcript = capitalize(final_transcript);
+
+                };
+            }
+
+
+            var two_line = /\n\n/g;
+            var one_line = /\n/g;
+
+            function linebreak(s) {
+                return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+            }
+
+            var first_char = /\S/;
+
+            function capitalize(s) {
+                return s.replace(first_char, function(m) {
+                    return m.toUpperCase();
+                });
+            }
+
+
+            function lancervoix() {
+                /*window.choix = "0";*/
+
+
+                if (recognizing) {
+                    recognition.stop();
+                    return;
+                }
+
+
+                final_transcript = '';
+                recognition.lang = 'fr-FR';
+                recognition.start();
+                ignore_onend = false;
+                question.play();
+                picto.src = "Bulle.gif";
+
+
+
+                $("#content-progress").css("width", "100%");
+                $("#content-progress").animate({
+                    "width": "0%"
+                }, 10000, "linear", function() {
+                    if (window.choix == "0") {
+                        recognition.stop();
+                        buzz.play();
+                        lancervoix();
+                        $("#content-progress").css("width", "100%");
+                    }
+                });
+            }
+
+
+            (function() {
+
+                var qr = window.qr = new QRious({
+                    element: document.getElementById('qrious'),
+                    size: 350,
+                    value: 'https://tim.cgmatane.qc.ca/projets/2019/eq6/ficheperso/perso.php?code=' + code
+                });
+
+                var qr2 = window.qr2 = new QRious({
+                    element: document.getElementById('qrious2'),
+                    size: 350,
+                    value: 'https://tim.cgmatane.qc.ca/projets/2019/eq6/louis/index.php?code=' + code
+                });
+
+            })();
+
+            function requete(x) {
+
+                var xhr = httpRequest
+                xhr.open('GET', 'requete.php?req=' + x + '&code=' + code, true)
+                // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
+                xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest')
+                // On lance la requête
+                xhr.send()
+            }
+
+            function entree(x, y) {
+
+                $.post("requete.php", {
+                    question: " ",
+                    parole: y,
+                    code: x,
+                    num: code
+                });
+            }
+
+            function parole(retour) {
+
+                $.post("requete.php", {
+                        req: "speak",
+                        parole: retour
+                    },
+                    function(data) {
+
+
+                        if (data == "" || retour == "") {
+                            picto.src = "Bulle.png";
+                            entree("data", retour);
+                            lancervoix();
+                            window.choix = "0";
+                        } else {
+
+                            window.seq = data;
+                            vid.src = data + '.mp4';
+                            picto.src = "Bulle.png";
+                            $("h1").delay(1000).fadeOut("slow");
+
+                            $("#progress").delay(1000).fadeOut("slow");
+
+                            window.choix = data;
+
+                            if (data == "A01") {
+                                $(".choix1").addClass("select");
+                            }
+
+
+                            //A022
+                            if (data == "A022") {
+
+                                $(".choix1").addClass("select");
+
+
+                            }
+
+
+                            //A021
+                            if (data == "A021") {
+
+                                $(".choix2").addClass("select");
+
+                            }
+
+                            //A031
+                            if (data == "A031") {
+
+                                $(".choix1").addClass("select");
+
+                            }
+
+                            //A032
+                            if (data == "A032") {
+
+
+                                $(".choix2").addClass("select");
+
+                            }
+
+                            //A04M
+                            if (data == "A04M") {
+
+
+                                $(".choix1").addClass("select");
+                                window.int_m++;
+
+                            }
+
+                            //A04C
+                            if (data == "A04C") {
+
+
+                                $(".choix3").addClass("select");
+                                window.int_c++;
+
+                            }
+
+                            //A04S
+                            if (data == "A04S") {
+
+
+                                $(".choix2").addClass("select");
+                                window.int_s++;
+
+                            }
+
+                            //A04ES
+                            if (data == "A04ES") {
+
+
+                                $(".choix4").addClass("select");
+                                window.int_es++;
+
+                            }
+
+                            //A04M1
+                            if (data == "A04M1") {
+
+
+                                $(".choix1").addClass("select");
+                                window.int++;
+
+
+
+                            }
+
+                            //A04M2
+                            if (data == "A04M2") {
+
+                                $(".choix2").addClass("select");
+                                window.int++;
+
+
+                            }
+
+                            //A04C1
+                            if (data == "A04C1") {
+
+
+
+                                $(".choix1").addClass("select");
+                                window.int++;
+
+                            }
+
+                            //A04C2
+                            if (data == "A04C2") {
+
+                                $(".choix2").addClass("select");
+                                window.int++;
+
+                            }
+
+                            //A04S1
+                            if (data == "A04S1") {
+
+
+                                $(".choix1").addClass("select");
+                                window.int++;
+
+                            }
+
+                            //A04S2
+                            if (data == "A04S2") {
+
+
+                                $(".choix2").addClass("select");
+                                window.int++;
+
+                            }
+
+                            //A04ES1
+                            if (data == "A04ES1") {
+
+
+
+                                $(".choix1").addClass("select");
+                                window.int++;
+
+                            }
+
+                            //A04ES2
+                            if (data == "A04ES2") {
+
+                                $(".choix2").addClass("select");
+                                window.int++;
+
+                            }
+
+                            //A051
+                            if (data == "A051") {
+
+
+
+                                $(".choix1").addClass("select");
+
+                            }
+
+                            //A052
+                            if (data == "A052") {
+
+                                $(".choix2").addClass("select");
+
+                            }
+
+
+                            //B01ES
+                            if (data == "B01ES") {
+
+
+
+                                $(".choix1").addClass("select");
+                                window.acc_es++
+                            }
+
+
+                            //B01C
+                            if (data == "B01C") {
+
+                                $(".choix2").addClass("select");
+                                window.acc_c++
+
+                            }
+
+
+                            //B01S
+                            if (data == "B01S") {
+
+                                $(".choix3").addClass("select");
+
+                            }
+
+                            //B01M
+                            if (data == "B01M") {
+
+                                $(".choix4").addClass("select");
+                                window.acc_m++
+
+
+                            }
+
+
+
+
+                        }
+                    });
+            }
+
+
+
+
+
+            ambiance.onended = function() {
+                $(".enquete").fadeOut();
+                window.seq = "B01"
+                vid.src = "B01.mp4";
+            };
+
+
+            function regvue() {
+                $("#vue").load('requete.php?req=nbvue&code=' + code)
+                var vue = $("#vue").html();
+                if ($("#vue").html() >= 3 && r == 0) {
+                    $(".enquete").fadeOut();
+                    window.seq = "B01"
+                    vid.src = "B01.mp4";
+
+                    ambiance.pause();
+
+                    r++;
+                }
+            }
+
+            setInterval(function() {
+                regvue()
+            }, 1000);
+
+</script>
+
+</html>
